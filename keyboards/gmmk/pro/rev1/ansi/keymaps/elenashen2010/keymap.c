@@ -64,3 +64,17 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) }
 };
 #endif
+
+
+#ifdef LED_MATRIX_ENABLE
+// Use capslock's LED to indicate whether capslock is on or off
+bool led_matrix_indicators_user(void) {
+    if (host_keyboard_led_state().caps_lock) {
+        led_matrix_set_value(SW1_CS11, 0xFF);
+    // } else {
+    //     led_matrix_set_value(87, 0x00);
+        return false;
+    }
+    return true;
+}
+#endif
